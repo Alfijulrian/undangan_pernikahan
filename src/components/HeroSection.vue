@@ -18,20 +18,15 @@
       <p class="date">08 Januari 2026</p>
 
       <!-- FIXED BUTTON -->
-      <button @click="scrollDown">
-        Buka Undangan
-      </button>
+      <button @click="scrollDown">Buka Undangan</button>
     </div>
 
     <!-- BUNGA BAWAH -->
     <img src="/images/bunga_kiri.png" class="flower flower-bottom-left" />
     <img src="/images/bunga_kanan.png" class="flower flower-bottom-right" />
 
-    <!-- ===== BUNGA PALING BAWAH TENGAH ===== -->
-    <img
-      src="/images/bunga_bawah.png"
-      class="flower flower-bottom-center"
-    />
+    <!-- BUNGA PALING BAWAH TENGAH -->
+    <img src="/images/bunga_bawah.png" class="flower flower-bottom-center" />
 
     <!-- RUMAH -->
     <img src="/images/rumah_melayu.webp" class="rumah" />
@@ -52,7 +47,7 @@ onMounted(() => {
 
 // Scroll langsung ke OpeningSection saat klik tombol
 const scrollDown = () => {
-  const target = document.getElementById('opening-section') // ID OpeningSection
+  const target = document.getElementById('opening-section')
   if (target) {
     target.scrollIntoView({ behavior: 'smooth' })
   }
@@ -94,35 +89,37 @@ const scrollDown = () => {
 }
 
 .guest {
-  font-size: 13px;
+  font-size: 14px;
   margin-bottom: 18px;
 }
 
 .subtitle {
-  font-size: 12px;
+  font-size: 16px;
   letter-spacing: 3px;
 }
 
 .title {
   font-family: 'Great Vibes', cursive;
-  font-size: 38px;
+  font-size: 48px; /* Lebih besar */
   margin: 12px 0;
 }
 
 .date {
-  font-size: 14px;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
 /* ================= BUTTON ================= */
 button {
   margin-top: 24px;
-  padding: 11px 34px;
+  padding: 12px 36px;
   border-radius: 30px;
   border: none;
   background: white;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 button:hover {
@@ -158,7 +155,7 @@ button:hover {
   left: -50px;
   width: 300px;
   z-index: 4;
-  animation: flowerLeft 1.4s ease forwards;
+  animation: flowerLeft 1.4s ease forwards, sway 13s ease-in-out infinite alternate;
 }
 
 .flower-top-right {
@@ -166,163 +163,88 @@ button:hover {
   right: -50px;
   width: 300px;
   z-index: 4;
-  animation: flowerRight 1.4s ease forwards;
+  animation: flowerRight 1.4s ease forwards, swayReverse 14s ease-in-out infinite alternate;
 }
 
 /* ===== BUNGA BAWAH ===== */
 .flower-bottom-left {
-  bottom: -70px;              /* ⬅️ sedikit naik */
+  bottom: -70px;
   left: -50px;
   width: 230px;
-  z-index: 6;                 /* ⬅️ DI ATAS bunga tengah */
-  animation: flowerBottomLeft 1.6s ease forwards;
+  z-index: 6;
+  animation: flowerBottomLeft 1.6s ease forwards, sway 15s ease-in-out infinite alternate;
 }
 
 .flower-bottom-right {
-  bottom: -70px;              /* ⬅️ sedikit naik */
+  bottom: -70px;
   right: -50px;
   width: 230px;
-  z-index: 6;                 /* ⬅️ DI ATAS bunga tengah */
-  animation: flowerBottomRight 1.6s ease forwards;
+  z-index: 6;
+  animation: flowerBottomRight 1.6s ease forwards, swayReverse 16s ease-in-out infinite alternate;
 }
 
 /* ===== BUNGA PALING BAWAH TENGAH ===== */
 .flower-bottom-center {
-  position: absolute;
   bottom: -40px;
   left: 0;
   right: 0;
-  margin: 0 auto;       /* ⬅️ CENTER KIRI–KANAN */
+  margin: 0 auto;
   width: 110%;
   max-width: 480px;
   z-index: 4;
   opacity: 1;
-  pointer-events: none;
 }
 
-
-
-/* ================= ANIMATIONS ================= */
+/* ================= ANIMASI ================= */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes houseUp {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 70px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
+  from { opacity: 0; transform: translate(-50%, 70px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
 }
 
 @keyframes flowerLeft {
-  from {
-    opacity: 0;
-    transform: translate(-50px, -20px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
+  from { opacity: 0; transform: translate(-50px, -20px); }
+  to { opacity: 1; transform: translate(0, 0); }
 }
 
 @keyframes flowerRight {
-  from {
-    opacity: 0;
-    transform: translate(50px, -20px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
+  from { opacity: 0; transform: translate(50px, -20px); }
+  to { opacity: 1; transform: translate(0, 0); }
 }
 
 @keyframes flowerBottomLeft {
-  from {
-    opacity: 0;
-    transform: translate(-40px, 50px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
+  from { opacity: 0; transform: translate(-40px, 50px); }
+  to { opacity: 1; transform: translate(0, 0); }
 }
 
 @keyframes flowerBottomRight {
-  from {
-    opacity: 0;
-    transform: translate(40px, 50px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
+  from { opacity: 0; transform: translate(40px, 50px); }
+  to { opacity: 1; transform: translate(0, 0); }
 }
 
-/* ================= ANIMASI BUNGA BERGOYANG HALUS ================= */
-.flower {
-  transform-origin: center top;
-  animation:
-    sway 12s ease-in-out infinite alternate;
-}
-
-/* Beda timing biar natural */
-.flower-top-left {
-  animation:
-    flowerLeft 1.4s ease forwards,
-    sway 13s ease-in-out infinite alternate;
-}
-
-.flower-top-right {
-  animation:
-    flowerRight 1.4s ease forwards,
-    swayReverse 14s ease-in-out infinite alternate;
-}
-
-.flower-bottom-left {
-  animation:
-    flowerBottomLeft 1.6s ease forwards,
-    sway 15s ease-in-out infinite alternate;
-}
-
-.flower-bottom-right {
-  animation:
-    flowerBottomRight 1.6s ease forwards,
-    swayReverse 16s ease-in-out infinite alternate;
-}
-
-/* ================= KEYFRAMES GOYANG ================= */
+/* ================= GOYANG HALUS ================= */
 @keyframes sway {
-  0% {
-    transform: rotate(-1.5deg) translateY(0);
-  }
-  50% {
-    transform: rotate(1.5deg) translateY(4px);
-  }
-  100% {
-    transform: rotate(-1.5deg) translateY(0);
-  }
+  0% { transform: rotate(-1.5deg) translateY(0); }
+  50% { transform: rotate(1.5deg) translateY(4px); }
+  100% { transform: rotate(-1.5deg) translateY(0); }
 }
 
 @keyframes swayReverse {
-  0% {
-    transform: rotate(1.5deg) translateY(0);
-  }
-  50% {
-    transform: rotate(-1.5deg) translateY(4px);
-  }
-  100% {
-    transform: rotate(1.5deg) translateY(0);
-  }
+  0% { transform: rotate(1.5deg) translateY(0); }
+  50% { transform: rotate(-1.5deg) translateY(4px); }
+  100% { transform: rotate(1.5deg) translateY(0); }
+}
+
+/* ================= RESPONSIF MOBILE ================= */
+@media (max-width: 768px) {
+  .subtitle { font-size: 18px; }
+  .title { font-size: 36px; } /* diperbesar di mobile */
+  .date { font-size: 18px; }
+  .guest { font-size: 16px; }
+  button { font-size: 16px; padding: 12px 36px; }
 }
 </style>

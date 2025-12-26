@@ -1,17 +1,20 @@
 <template>
-  <section class="gallery-section">
-    <h2>Galeri Foto</h2>
-    <div class="gallery">
-      <div
-        class="gallery-item"
-        v-for="(img, index) in images"
-        :key="index"
-        :ref="el => galleryRefs[index] = el"
-        :class="{ 'is-visible': visible[index] }"
-      >
-        <img :src="img" alt="Foto Pernikahan" />
+  <section class="section gallery-section">
+    <h2>Galeri</h2>
+    
+    <div class="gallery-container"> 
+      <div class="gallery">
+        <div 
+          class="gallery-item" 
+          v-for="(img, index) in images" 
+          :key="index" 
+          :ref="el => galleryRefs[index] = el"
+        >
+          <img :src="img" alt="Foto Pernikahan">
+        </div>
       </div>
     </div>
+    
   </section>
 </template>
 
@@ -19,31 +22,34 @@
 import { ref, onMounted } from 'vue'
 
 const images = [
-  '/images/f1.webp',
-  '/images/f2.webp',
-  '/images/f3.webp',
-  '/images/f4.webp',
-  '/images/f5.webp',
-  '/images/f6.webp',
+  '/images/f_cowok.jpg',
+  '/images/f_cewek.jpg',
+  '/images/BNK_9140.jpg',
+  '/images/BNK_9142 (1).jpg',
+  '/images/BNK_9148.jpg',
+  '/images/BNK_9150.jpg',
+  '/images/BNK_9241.jpg',
+  '/images/BNK_9319.jpg',
+  '/images/BNK_9336.jpg',
+  '/images/BNK_9355.jpg',
+  '/images/BNK_9357.jpg',
+  '/images/BNK_9369.jpg'
 ]
 
 const galleryRefs = ref([])
-const visible = ref(Array(images.length).fill(false))
 
 onMounted(() => {
   const observer = new IntersectionObserver(
-    entries => {
+    (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const index = galleryRefs.value.indexOf(entry.target)
-          if (index !== -1) visible.value[index] = true
+          entry.target.classList.add('show')
           observer.unobserve(entry.target)
         }
       })
     },
-    { threshold: 0.2 }
+    { threshold: 0.1 } 
   )
-
   galleryRefs.value.forEach(el => {
     if (el) observer.observe(el)
   })
@@ -52,55 +58,76 @@ onMounted(() => {
 
 <style scoped>
 .gallery-section {
-  padding: 3rem 2rem;
   text-align: center;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: 2rem 1rem;
+  background-color: #ffe6f0;
 }
 
-.gallery-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2.5rem;
-  color: #333;
-  font-family: 'Segoe UI', sans-serif;
+h2 {
+  margin-bottom: 1.5rem;
+  color: #ff69b4;
+  font-size: 1.8rem;
 }
 
+/* Scroll container */
+.gallery-container {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.gallery-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Flex horizontal */
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  justify-items: center;
-  width: 100%;
+  display: flex;
+  gap: 10px; 
+  width: max-content; 
 }
 
-/* Gallery Item */
+/* Gallery item */
 .gallery-item {
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  overflow: hidden;
+  flex-shrink: 0; 
+  width: calc(50vw - 10px); /* default HP: 2 item */
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  transform: translateY(30px);
+  overflow: hidden;
+  transform: scale(0.8);
   opacity: 0;
-  transition: transform 0.6s ease, opacity 0.6s ease, transform 0.3s ease;
+  transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
-/* Fade-in saat muncul */
-.gallery-item.is-visible {
-  transform: translateY(0);
+.gallery-item.show {
+  transform: scale(1);
   opacity: 1;
-}
-
-/* Zoom saat hover */
-.gallery-item:hover {
-  transform: scale(1.08);
-  box-shadow: 0 14px 35px rgba(0,0,0,0.3);
 }
 
 .gallery-item img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto; /* otomatis menyesuaikan tinggi */
   display: block;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.05);
+}
+
+/* Tablet: 3 item */
+@media (min-width: 600px) {
+  .gallery-item {
+    width: calc(33.33vw - 12px);
+  }
+}
+
+/* Desktop: 4 item */
+@media (min-width: 992px) {
+  .gallery-item {
+    width: calc(25vw - 12px);
+  }
 }
 </style>

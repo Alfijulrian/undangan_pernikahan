@@ -1,159 +1,86 @@
 <template>
-  <section class="section" id="detail-acara-section">
-    <div class="background-overlay"></div>
-    
-    <div class="content-wrapper">
-      <h2 class="animated">Detail Acara</h2> 
+  <section class="section">
+    <!-- Background dekorasi -->
+    <BackgroundDecor />
 
-      <div class="card animated"> 
+    <!-- Konten Event di atas BackgroundDecor -->
+    <div class="content-wrapper">
+      <h2>Detail Acara</h2>
+
+      <div class="card">
         <h3>Akad Nikah</h3>
-        <p>rabu, 07 Januari 2026</p>
+        <p>Rabu, 07 Januari 2026</p>
         <p>09.00 WIB</p>
         <p>Kediaman Mempelai Wanita</p>
       </div>
 
-      <div class="card animated"> 
+      <div class="card">
         <h3>Resepsi</h3>
-        <p>kamis, 08 Januari 2026</p>
+        <p>Kamis, 08 Januari 2026</p>
         <p>11.00 WIB</p>
-        <p>Bertempat kediaman wanita</p>
+        <p>Bertempat di Kediaman Wanita</p>
       </div>
     </div>
   </section>
 </template>
 
+<script setup>
+import BackgroundDecor from './BackgroundDecor.vue'
+</script>
+
 <style scoped>
-/* 1. Pengaturan Latar Belakang Penuh */
 .section {
-  /* Mengatur gambar sebagai latar belakang */
-  background-image: url('/images/BNK_9336.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  position: relative;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  padding: 40px 20px;
+  padding: 30px 15px;
+  overflow: hidden;
 }
 
-/* 2. Overlay untuk Keterbacaan */
-.background-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Tambahkan warna gelap/transparan agar teks putih lebih menonjol */
-  background-color: rgba(0, 0, 0, 0.4); 
-}
-
-/* 3. Wrapper Konten (memastikan konten di atas overlay) */
+/* Wrapper konten agar muncul di atas BackgroundDecor */
 .content-wrapper {
   position: relative;
-  z-index: 1;
+  z-index: 10; /* Pastikan konten di atas dekorasi */
   text-align: center;
-  max-width: 400px;
   width: 100%;
+  max-width: 400px;
 }
 
-/* 4. Gaya Judul */
+/* Judul */
 h2 {
   font-family: 'Times New Roman', serif;
-  font-size: 40px;
-  color: #fffc4e;
-  margin-bottom: 40px;
-  /* Tambahan untuk inisialisasi animasi pada h2 */
-  opacity: 0; 
-  transform: translate3d(0, 20px, 0); /* Mulai lebih dekat ke posisi akhir */
+  font-size: 28px;
+  color: #ff69b4;
+  margin-bottom: 30px;
 }
 
-/* 5. Gaya Kartu Detail Acara */
+/* Kartu acara */
 .card {
-  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 15px;
   border-radius: 12px;
-  margin-bottom: 25px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
-  /* Tambahan untuk inisialisasi animasi pada card */
-  opacity: 0;
-  transform: translate3d(0, 40px, 0); /* Mulai 40px di bawah posisi akhir */
-  transition: none; /* Nonaktifkan transisi awal */
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .card h3 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
-  color: #000000;
-  margin-bottom: 10px;
+  color: #333;
+  margin-bottom: 8px;
 }
 
 .card p {
-  font-size: 16px;
-  color: #000000;
-  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+  margin: 4px 0;
 }
 
-/* =============================
-   6. Keyframes dan Animasi 
-   ============================= */
-
-/* Definisikan keyframes untuk efek Fade In Up */
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-/* Class yang ditambahkan oleh JavaScript ketika elemen masuk ke viewport */
-.fadeInUp {
-  opacity: 0; /* Override: Mulai dari opacity 0 */
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-/* Atur durasi delay untuk setiap elemen agar muncul bergantian */
-h2.fadeInUp {
-  animation-delay: 0s;
-}
-
-.card:nth-child(2).fadeInUp { /* Kartu Akad Nikah */
-  animation-delay: 0.2s; 
-}
-
-.card:nth-child(3).fadeInUp { /* Kartu Resepsi */
-  animation-delay: 0.5s; 
+/* Responsif untuk mobile */
+@media (max-width: 768px) {
+  h2 { font-size: 24px; }
+  .card { padding: 12px; }
 }
 </style>
-
-<script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    // 1. Pilih semua elemen yang memiliki class 'animated'
-    const animatedElements = document.querySelectorAll('.animated');
-
-    // 2. Definisikan opsi observer
-    const observerOptions = {
-        root: null, // Mengamati relatif terhadap viewport
-        rootMargin: '0px',
-        threshold: 0.1 // Pemicu saat 10% elemen terlihat
-    };
-
-    // 3. Buat observer
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            // Jika elemen terlihat (intersecting)
-            if (entry.isIntersecting) {
-                // Tambahkan class untuk memulai animasi
-                entry.target.classList.add('fadeInUp');
-                // Hentikan pengamatan setelah dianimasikan
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // 4. Mulai mengamati setiap elemen
-    animatedElements.forEach(element => {
-        observer.observe(element);
-    });
-});
-</script>

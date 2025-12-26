@@ -1,136 +1,101 @@
 <template>
-  <section class="opening">
-    <!-- Bingkai atas -->
-    <img 
-      ref="frameTop" 
-      src="/images/bingkai_atas.png" 
-      alt="Bingkai Atas" 
-      class="frame frame-top animated" 
-    />
+  <!-- Section Opening -->
+  <section class="opening-section">
+    <!-- Bingkai / gambar atas -->
+    <img src="/images/bingkai_atas.png" alt="Bingkai Atas" class="frame top-frame" />
 
-    <!-- Bismillah / Ayat pembuka -->
-    <p ref="arabText" class="arab animated">
-      بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+    <!-- Tulisan Bismillah -->
+    <h2 class="bismillah">بسم الله الرحمن الرحيم</h2>
+
+    <!-- Tulisan Assalamu’alaikum dalam Arab -->
+    
+
+    <!-- Kata-kata pembuka panjang -->
+    <p class="opening-text">
+      Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i 
+      untuk hadir dan memberikan doa restu pada acara pernikahan kami. Semoga kehadiran 
+      Anda menjadi bagian dari kebahagiaan dan keberkahan dalam pernikahan kami. 
+      Mohon doa, restu, dan keikhlasan untuk menyaksikan awal perjalanan hidup kami 
+      yang penuh berkah, cinta, dan kasih sayang. Semoga Allah SWT senantiasa melimpahkan 
+      rahmat, keberkahan, dan kebahagiaan pada keluarga kita semua.
     </p>
 
-    <!-- Kata-kata pemanis undangan -->
-    <p ref="mainText" class="text animated">
-      Dengan memohon rahmat dan ridho Allah SWT,<br />
-      kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan putra dan putri kami.<br />
-      Semoga pernikahan ini menjadi awal keluarga yang sakinah, mawaddah, dan rahmah, serta selalu berada dalam lindungan Allah SWT.
-    </p>
-
-    <!-- Hadis pemanis -->
-    <p ref="hadisText" class="hadis animated">
-      “Nikah adalah sunnahku, siapa yang meninggalkannya bukan dari golonganku.”<br />
-      <span>(HR. Bukhari dan Muslim)</span>
-    </p>
-
-    <!-- Bingkai bawah -->
-    <img 
-      ref="frameBottom" 
-      src="/images/bingkai_bawah.png" 
-      alt="Bingkai Bawah" 
-      class="frame frame-bottom animated" 
-    />
+    <!-- Bingkai / gambar bawah -->
+    <img src="/images/bingkai_bawah.png" alt="Bingkai Bawah" class="frame bottom-frame" />
   </section>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-
-// Animasi fadeInUp saat scroll
-onMounted(() => {
-  const animatedElements = document.querySelectorAll('.animated')
-  const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }
-
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('fadeInUp')
-        observer.unobserve(entry.target)
-      }
-    })
-  }, observerOptions)
-
-  animatedElements.forEach(el => observer.observe(el))
-})
-
-// Musik otomatis saat buka undangan
-document.addEventListener('startMusic', async () => {
-  if (!window.bgMusic) {
-    window.bgMusic = new Audio('/music/wedding-music.mp3') // ganti path musik
-    window.bgMusic.loop = true
-  }
-  if (window.bgMusic.paused) {
-    await window.bgMusic.play()
-  }
-})
+// Tidak ada script karena halaman ini statis
 </script>
 
 <style scoped>
-.opening {
+/* Opening Section */
+.opening-section {
   position: relative;
+  min-height: 100vh;
+  padding: 60px 20px;
   text-align: center;
-  padding: 40px 20px;
-  background: #fdf6f0;
+  background-color: #fff0f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Bingkai / Frame */
 .frame {
-  width: 100px;
-  max-width: 150px;
-  margin: 20px auto;
-  display: block;
+  max-width: 90%;
+  height: auto;
+  margin: 20px 0;
 }
 
-.arab {
-  font-size: 24px;
+.top-frame {
+  margin-bottom: 40px;
+}
+
+.bottom-frame {
+  margin-top: 40px;
+}
+
+/* Tulisan Bismillah */
+.bismillah {
   font-family: 'Scheherazade', serif;
-  margin: 15px 0;
-  color: #333;
+  font-size: 36px;
+  color: #ff69b4;
+  margin-bottom: 10px;
 }
 
-.text {
+/* Tulisan Assalamu’alaikum Arab */
+.arabic-greeting {
+  font-family: 'Scheherazade', serif;
+  font-size: 28px;
+  color: #d6336c;
+  margin-bottom: 20px;
+}
+
+/* Kata-kata pembuka panjang */
+.opening-text {
   font-size: 16px;
-  line-height: 1.7;
-  margin: 15px 0;
-  color: #444;
+  color: #333;
+  max-width: 380px;
+  line-height: 1.8;
+  margin: 0 auto;
 }
 
-.hadis {
-  font-size: 14px;
-  font-style: italic;
-  color: #666;
-  margin: 15px 0 30px 0;
-}
+/* Responsif Mobile */
+@media (max-width: 768px) {
+  .bismillah {
+    font-size: 28px;
+  }
 
-.hadis span {
-  display: block;
-  font-size: 12px;
-  margin-top: 5px;
-  color: #888;
-}
+  .arabic-greeting {
+    font-size: 22px;
+  }
 
-/* =============================
-   Animasi Fade In Up
-   ============================= */
-@keyframes fadeInUp {
-  to { opacity: 1; transform: translateY(0); }
+  .opening-text {
+    font-size: 14px;
+    max-width: 90%;
+  }
 }
-
-.animated {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.fadeInUp {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-/* Delay animasi untuk tiap elemen */
-.frame-top.fadeInUp { animation-delay: 0s; }
-.arab.fadeInUp { animation-delay: 0.2s; }
-.text.fadeInUp { animation-delay: 0.4s; }
-.hadis.fadeInUp { animation-delay: 0.6s; }
-.frame-bottom.fadeInUp { animation-delay: 0.8s; }
 </style>
