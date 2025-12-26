@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #000;
+    font-family: 'Playfair Display', serif;
+}
+
+
+/* Wrapper khusus mobile */
+
+#app {
+    max-width: 420px;
+    margin: auto;
+    background: white;
+    overflow-x: hidden;
+}
+
+
+/* Section umum */
+
+.section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+
+/* Section gelap */
+
+.dark {
+    background: #111;
+    color: white;
+}
+
+
+/* Card mobile */
+
+.card {
+    background: white;
+    padding: 20px;
+    margin: 15px auto;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 320px;
+}
+
+
+/* Tombol */
+
+button {
+    font-size: 14px;
+}
