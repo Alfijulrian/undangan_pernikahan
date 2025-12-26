@@ -1,5 +1,5 @@
 <script setup>
-/* Import semua komponen */
+/* ================= IMPORT SEMUA KOMPONEN ================= */
 import HeroSection from './components/HeroSection.vue'
 import OpeningSection from './components/OpeningSection.vue'
 import GroomSection from './components/GroomSection.vue'
@@ -12,7 +12,7 @@ import WeddingGift from './components/WeddingGift.vue'
 import ClosingSection from './components/ClosingSection.vue'
 import MusicPlayer from './components/MusicPlayer.vue' // Komponen musik
 
-// Fungsi tombol "Buka Undangan"
+/* ================= FUNGSI BUKA UNDANGAN ================= */
 const openInvitation = () => {
   const opening = document.getElementById('opening-section')
   if (opening) opening.scrollIntoView({ behavior: 'smooth' })
@@ -24,12 +24,12 @@ const openInvitation = () => {
 
 <template>
   <div id="app">
-    <!-- Musik Player -->
+    <!-- ================= MUSIC PLAYER ================= -->
     <MusicPlayer />
 
-    <!-- HERO SECTION -->
+    <!-- ================= HERO SECTION ================= -->
     <HeroSection>
-      <!-- Tombol Buka Undangan -->
+      <!-- Slot Tombol Buka Undangan -->
       <template #button>
         <button class="open-btn" @click="openInvitation">
           Buka Undangan
@@ -37,37 +37,35 @@ const openInvitation = () => {
       </template>
     </HeroSection>
 
-    <!-- OPENING / PEMANIS -->
+    <!-- ================= OPENING / PEMANIS ================= -->
     <OpeningSection id="opening-section" />
 
-    <!-- PENGANTIN PRIA -->
+    <!-- ================= PENGANTIN ================= -->
     <GroomSection />
-
-    <!-- PENGANTIN WANITA -->
     <BrideSection />
 
-    <!-- DETAIL ACARA -->
+    <!-- ================= DETAIL ACARA ================= -->
     <EventSection />
 
-    <!-- COUNTDOWN -->
+    <!-- ================= COUNTDOWN ================= -->
     <CountdownSection />
 
-    <!-- GALLERY -->
+    <!-- ================= GALLERY ================= -->
     <GallerySection />
 
-    <!-- MAP -->
+    <!-- ================= MAP ================= -->
     <MapSection />
 
-    <!-- WEDDING GIFT -->
+    <!-- ================= WEDDING GIFT ================= -->
     <WeddingGift />
 
-    <!-- CLOSING -->
+    <!-- ================= CLOSING ================= -->
     <ClosingSection />
   </div>
 </template>
 
 <style>
-/* Reset dasar */
+/* ================= RESET DASAR ================= */
 * {
   margin: 0;
   padding: 0;
@@ -83,12 +81,12 @@ body, html, #app {
   overflow-x: hidden;
 }
 
-/* Scroll behavior smooth */
+/* ================= SCROLL SMOOTH ================= */
 html {
   scroll-behavior: smooth;
 }
 
-/* Optional global section spacing */
+/* ================= GLOBAL SECTION ================= */
 section {
   position: relative;
   width: 100%;
@@ -99,7 +97,7 @@ section {
   justify-content: center;
 }
 
-/* Section dengan background image */
+/* Background section image jika dibutuhkan */
 section .bg-photo {
   position: absolute;
   inset: 0;
@@ -109,7 +107,7 @@ section .bg-photo {
   filter: brightness(0.6);
 }
 
-/* Tombol Buka Undangan */
+/* ================= TOMBOL BUKA UNDANGAN ================= */
 .open-btn {
   padding: 12px 28px;
   font-size: 18px;
